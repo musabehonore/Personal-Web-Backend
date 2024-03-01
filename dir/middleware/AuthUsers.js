@@ -13,7 +13,16 @@ const jwtOptions = {
 passport_1.default.use(new passport_jwt_1.Strategy(jwtOptions, (jwtPayload, done) => {
     return done(null, jwtPayload);
 }));
-exports.authenticateUser = passport_1.default.authenticate('jwt', { session: false });
+const authenticateUser = (req, res, next) => {
+    passport_1.default.authenticate('jwt', { session: false }, (err, user, info) => {
+        if (!user) {
+            return res.status(401).json({ message: 'You are unauthenticated' });
+        }
+        req.user = user;
+        next();
+    })(req, res, next);
+};
+exports.authenticateUser = authenticateUser;
 const authorizeAdmin = (req, res, next) => {
     const user = req.user;
     if (user.role !== 'admin') {
