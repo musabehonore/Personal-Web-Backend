@@ -1,6 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/musabehonore/Personal-Web-Backend/badge.svg?branch=main)](https://coveralls.io/github/musabehonore/Personal-Web-Backend?branch=main)
 
-# Personal Web Backend
+# Musabe's Web Backend
 
 # Blog API
 ## Welcome to the Blog API!
