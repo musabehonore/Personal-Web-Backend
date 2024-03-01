@@ -1,7 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/musabehonore/Personal-Web-Backend/badge.svg?branch=main)](https://coveralls.io/github/musabehonore/Personal-Web-Backend?branch=main)
 
 Personal Web Backend
-Blog API
+
+**Blog API**
 Welcome to the Blog API! This API allows you to manage blog posts and comments.
 
 Features
