@@ -25,8 +25,8 @@ const authenticateUser = (req, res, next) => {
 exports.authenticateUser = authenticateUser;
 const authorizeAdmin = (req, res, next) => {
     const user = req.user;
-    if (user.role !== 'admin') {
-        return res.status(403).json({ message: 'Unauthorized access' });
+    if (!user || user.role !== 'admin') {
+        return res.status(401).json({ message: 'Unauthorized access' });
     }
     next();
 };

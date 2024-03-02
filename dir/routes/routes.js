@@ -16,21 +16,21 @@ const queriesController = new queriesController_1.QueriesController();
 router.get('/blogs', blogController.getAllBlogs);
 router.post('/blogs', AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, multer_1.default.single("image"), blogController.createBlog);
 router.get('/blogs/:id', blogController.getBlogById);
-router.patch("/blogs/:id", AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, blogController.updateBlog);
+router.patch("/blogs/:id", AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, multer_1.default.any(), blogController.updateBlog);
 router.delete("/blogs/:id", AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, blogController.deleteBlog);
 // comments .....
 router.get('/blogs/:id/comments', blogController.getComments);
-router.post('/blogs/:id/comments', AuthUsers_1.authenticateUser, blogController.CreateComment);
+router.post('/blogs/:id/comments', AuthUsers_1.authenticateUser, multer_1.default.any(), blogController.CreateComment);
 router.patch('/blogs/:id/comments/:id', AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, blogController.editCommentStatus);
 // likes...........
 router.post('/blogs/:id/like', blogController.likeBlog);
 router.get('/blogs/:id/likes', blogController.getLikes);
 //Queries.......
 router.get('/queries', AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, queriesController.getAllQueries);
-router.post('/queries', queriesController.createQuery);
+router.post('/queries', multer_1.default.any(), queriesController.createQuery);
 router.get('/queries/:id', AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, queriesController.getQueryById);
 router.delete('/queries/:id', AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, queriesController.deleteQuery);
 //Users routes......
-router.post('/signup', usersController_1.createUser);
-router.post('/login', usersController_1.loginUser);
+router.post('/signup', multer_1.default.any(), usersController_1.createUser);
+router.post('/login', multer_1.default.any(), usersController_1.loginUser);
 exports.default = router;

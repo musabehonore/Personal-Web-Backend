@@ -12,7 +12,7 @@ passport.use(new JwtStrategy(jwtOptions, (jwtPayload: IUser, done) => {
 }));
 
 export const authenticateUser = (req: any, res: any, next: any) => {
-  passport.authenticate('jwt', { session: false }, ( err: any, user: any, info: any) => {
+  passport.authenticate('jwt', { session: false }, (err: any, user: any, info: any) => {
     if (!user) {
       return res.status(401).json({ message: 'You are unauthenticated' });
     }
@@ -24,8 +24,8 @@ export const authenticateUser = (req: any, res: any, next: any) => {
 export const authorizeAdmin = (req: any, res: any, next: any) => {
   const user = req.user as IUser;
 
-  if (user.role !== 'admin') {
-    return res.status(403).json({ message: 'Unauthorized access' });
+  if (!user || user.role !== 'admin') {
+    return res.status(401).json({ message: 'Unauthorized access' });
   }
 
   next();

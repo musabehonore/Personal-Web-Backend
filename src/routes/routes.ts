@@ -13,12 +13,12 @@ const queriesController = new QueriesController();
 router.get('/blogs', blogController.getAllBlogs);
 router.post('/blogs', authenticateUser, authorizeAdmin, upload.single("image"), blogController.createBlog);
 router.get('/blogs/:id', blogController.getBlogById);
-router.patch("/blogs/:id", authenticateUser, authorizeAdmin, blogController.updateBlog);
+router.patch("/blogs/:id", authenticateUser, authorizeAdmin, upload.any(), blogController.updateBlog);
 router.delete("/blogs/:id", authenticateUser, authorizeAdmin, blogController.deleteBlog);
 
 // comments .....
 router.get('/blogs/:id/comments', blogController.getComments);
-router.post('/blogs/:id/comments', authenticateUser, blogController.CreateComment);
+router.post('/blogs/:id/comments', authenticateUser, upload.any(), blogController.CreateComment);
 router.patch('/blogs/:id/comments/:id', authenticateUser, authorizeAdmin, blogController.editCommentStatus);
 
 
@@ -29,13 +29,13 @@ router.get('/blogs/:id/likes', blogController.getLikes);
 
 //Queries.......
 router.get('/queries', authenticateUser, authorizeAdmin, queriesController.getAllQueries);
-router.post('/queries', queriesController.createQuery);
+router.post('/queries', upload.any(), queriesController.createQuery);
 router.get('/queries/:id', authenticateUser, authorizeAdmin, queriesController.getQueryById);
 router.delete('/queries/:id', authenticateUser, authorizeAdmin, queriesController.deleteQuery);
 
 
 //Users routes......
-router.post('/signup', createUser);
-router.post('/login', loginUser);
+router.post('/signup', upload.any(), createUser);
+router.post('/login', upload.any(), loginUser);
 
 export default router;

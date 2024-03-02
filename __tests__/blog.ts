@@ -282,6 +282,22 @@ describe("Testing API", () => {
       .set('Authorization', 'Bearer ' + token.token);
     expect(res.statusCode).toBe(200);
   });
+  it('unauthenticated Posting a comment', async () => {
+    const res = await superTest(app)
+      .post('/api/blogs/65e0fe53b61562a46e33e6dd/comments')
+      .send({
+        name: "mudanago",
+        email: "hhg@gmail.com",
+        comment: "like this",
+      })
+      expect(res.statusCode).toBe(401);
+  });
+  it('deleting a query', async () => {
+    const res = await superTest(app)
+      .delete('/api/queries/65e1e07fa33685f379de00af')
+      .set('Authorization', 'Bearer ' + token.token);
+    expect(res.statusCode).toBe(200);
+  });
 
   // it('Posting a blog', async () => {
   //   const res = await superTest(app)

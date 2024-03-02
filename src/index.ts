@@ -4,8 +4,15 @@ import mongoose from 'mongoose';
 import Router from './routes/routes';
 import swaggerUi from "swagger-ui-express"
 import swaggerDocuments from "../swagger.json"
+import bodyParser from 'body-parser';
+import multer from 'multer';
 
 const app: Express = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const upload = multer();
+// app.use(upload.any());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocuments));
 
