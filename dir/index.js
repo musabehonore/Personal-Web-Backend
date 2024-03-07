@@ -9,8 +9,22 @@ const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const swagger_json_1 = __importDefault(require("../swagger.json"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const multer_1 = __importDefault(require("multer"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.urlencoded({ extended: true }));
+app.use((0, cors_1.default)());
+// app.use(function(req, res, next) {
+//   // res.header("Access-Control-Allow-Origin", "*");
+//   const allowedOrigins = ['http://localhost:3000', 'http://gamebrag.onrender.com', 'https://gamebrag.onrender.com'];
+//   const origin: any = req.headers.origin;
+//   if (allowedOrigins.includes(origin)) {
+//        res.setHeader('Access-Control-Allow-Origin', origin);
+//   }
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//   res.header("Access-Control-Allow-credentials", true);
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
+//   next();
+// }); 
 const upload = (0, multer_1.default)();
 // app.use(upload.any());
 app.use('/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
