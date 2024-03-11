@@ -188,7 +188,7 @@ describe("Testing API", () => {
 
   it('Liking', async () => {
     const res = await superTest(app)
-      .post('/api/blogs/65e0fe53b61562a46e33e6dd/like')
+      .post('/api/blogs/65e1e67a6d14c490fa496f6a/like')
       .send({
         name: "mudanago",
         email: "hhg@gmail.com",
@@ -199,7 +199,7 @@ describe("Testing API", () => {
   });
   it('Liking', async () => {
     const res = await superTest(app)
-      .get('/api/blogs/65e0fe53b61562a46e33e6dd/likes')
+      .get('/api/blogs/65e1e67a6d14c490fa496f6a/likes')
       .set('Authorization', 'Bearer ' + token.token);
     expect(res.statusCode).toBe(200);
   });
@@ -237,7 +237,7 @@ describe("Testing API", () => {
   });
   it('get a blog', async () => {
     const res = await superTest(app)
-      .get('/api/blogs/65e0fe53b61562a46e33e6dd')
+      .get('/api/blogs/65e1e67a6d14c490fa496f6a')
       .set('Authorization', 'Bearer ' + token.token);
     expect(res.statusCode).toBe(200);
   });
@@ -286,8 +286,8 @@ describe("Testing API", () => {
     const res = await superTest(app)
       .post('/api/blogs/65e0fe53b61562a46e33e6dd/comments')
       .send({
-        name: "mudanago",
-        email: "hhg@gmail.com",
+        name: "mudanagooo",
+        email: "hhgggg@gmail.com",
         comment: "like this",
       })
       expect(res.statusCode).toBe(401);

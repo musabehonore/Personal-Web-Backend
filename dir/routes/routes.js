@@ -22,7 +22,7 @@ router.patch("/blogs/:id", AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAd
 router.delete("/blogs/:id", AuthUsers_1.authenticateUser, AuthUsers_1.authorizeAdmin, blogController.deleteBlog);
 // comments .....
 router.get('/blogs/:id/comments', blogController.getComments);
-router.post('/blogs/:id/comments', multer_1.default.any(), blogController.CreateComment);
+router.post('/blogs/:id/comments', AuthUsers_1.authenticateUser, multer_1.default.any(), blogController.CreateComment);
 router.patch('/blogs/:id/comments/:id', blogController.editCommentStatus);
 // likes...........
 router.post('/blogs/:id/like', blogController.likeBlog);

@@ -21,7 +21,7 @@ router.delete("/blogs/:id", authenticateUser, authorizeAdmin, blogController.del
 
 // comments .....
 router.get('/blogs/:id/comments', blogController.getComments);
-router.post('/blogs/:id/comments',  upload.any(), blogController.CreateComment);
+router.post('/blogs/:id/comments', authenticateUser, upload.any(), blogController.CreateComment);
 router.patch('/blogs/:id/comments/:id',  blogController.editCommentStatus);
 
 
