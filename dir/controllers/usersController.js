@@ -32,7 +32,7 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         const hashedPassword = yield bcrypt_1.default.hash(password, 10);
         const newUser = new User_1.default({ username, password: hashedPassword, email, role });
         yield newUser.save();
-        const token = jsonwebtoken_1.default.sign({ username: newUser.username, role: newUser.role }, jwtSecret, {
+        const token = jsonwebtoken_1.default.sign({ username: newUser.username, email: newUser.email, role: newUser.role }, jwtSecret, {
             expiresIn: '3h'
         });
         res.status(201)
@@ -60,7 +60,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-        const token = jsonwebtoken_1.default.sign({ username: user.username, role: user.role }, jwtSecret, {
+        const token = jsonwebtoken_1.default.sign({ username: user.username, email: user.email, role: user.role }, jwtSecret, {
             expiresIn: '10h'
         });
         res.status(200)

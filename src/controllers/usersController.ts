@@ -27,7 +27,7 @@ const createUser = async (req: Request, res: Response) => {
     const newUser = new IUser({ username, password: hashedPassword, email, role });
     await newUser.save();
 
-    const token = jwt.sign({ username: newUser.username, role: newUser.role }, jwtSecret, {
+    const token = jwt.sign({ username: newUser.username, email: newUser.email, role: newUser.role }, jwtSecret, {
       expiresIn: '3h'
     });
 
@@ -59,7 +59,7 @@ const loginUser = async (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ username: user.username, role: user.role }, jwtSecret, {
+    const token = jwt.sign({ username: user.username, email: user.email, role: user.role }, jwtSecret, {
       expiresIn: '10h'
     });
 

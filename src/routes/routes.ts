@@ -14,10 +14,10 @@ router.use(cors());
 
 //blogs......
 router.get('/blogs', blogController.getAllBlogs);
-router.post('/blogs', upload.single("image"), blogController.createBlog);
+router.post('/blogs',  authenticateUser, authorizeAdmin, upload.single("image"), blogController.createBlog);
 router.get('/blogs/:id', blogController.getBlogById);
-router.patch("/blogs/:id", upload.any(), blogController.updateBlog);
-router.delete("/blogs/:id",  blogController.deleteBlog);
+router.patch("/blogs/:id",authenticateUser, authorizeAdmin, upload.any(), blogController.updateBlog);
+router.delete("/blogs/:id", authenticateUser, authorizeAdmin, blogController.deleteBlog);
 
 // comments .....
 router.get('/blogs/:id/comments', blogController.getComments);
@@ -31,10 +31,10 @@ router.get('/blogs/:id/likes', blogController.getLikes);
 
 
 //Queries.......
-router.get('/queries',  queriesController.getAllQueries);
+router.get('/queries',  authenticateUser, authorizeAdmin, queriesController.getAllQueries);
 router.post('/queries', upload.any(), queriesController.createQuery);
-router.get('/queries/:id', queriesController.getQueryById);
-router.delete('/queries/:id',  queriesController.deleteQuery);
+router.get('/queries/:id', authenticateUser, authorizeAdmin, queriesController.getQueryById);
+router.delete('/queries/:id', authenticateUser, authorizeAdmin, queriesController.deleteQuery);
 
 
 //Users routes......
