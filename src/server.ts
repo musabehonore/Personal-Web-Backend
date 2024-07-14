@@ -1,8 +1,9 @@
 import app from './index';
 import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
 
-
-mongoose.connect('mongodb+srv://MusabeDB:Musabe1@musabedb.yhmlt9y.mongodb.net/?retryWrites=true&w=majority&appName=MusabeDB')
+dotenv.config();
+mongoose.connect(`${process.env.DATABASE_URL}`)
   .then(() => {
     console.log('Connected to MongoDB !! ');
     

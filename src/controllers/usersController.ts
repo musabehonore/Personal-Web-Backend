@@ -4,9 +4,11 @@ import jwt from 'jsonwebtoken';
 import IUser from '../models/User';
 import { Error } from 'mongoose';
 import { loginVal, signInVal } from '../validations/usersValidation';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 
-const jwtSecret = 'a03e10a4e39a1ea26f741d78cc82478096037016cd5a3c9b1952e45123546162';
+const jwtSecret = `${process.env.JWT_SECRET}`;
 
 const createUser = async (req: Request, res: Response) => {
   try {

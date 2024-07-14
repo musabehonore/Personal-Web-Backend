@@ -1,10 +1,13 @@
 import passport from 'passport';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import { IUser } from '../types/userType';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'a03e10a4e39a1ea26f741d78cc82478096037016cd5a3c9b1952e45123546162'
+  secretOrKey: `${process.env.JWT_SECRET}`
 };
 
 passport.use(new JwtStrategy(jwtOptions, (jwtPayload: IUser, done) => {

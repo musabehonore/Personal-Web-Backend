@@ -3,11 +3,12 @@ import superTest, { Request, Response } from 'supertest';
 import mongoose from 'mongoose';
 import app from '../src/index';
 import IUser from '../src/models/User';
-import { loginUser } from '../src/controllers/usersController';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 
 beforeAll(async () => {
-  await mongoose.connect('mongodb+srv://MusabeDB:Musabe1@musabedb.yhmlt9y.mongodb.net/?retryWrites=true&w=majority&appName=MusabeDB');
+  await mongoose.connect(`${process.env.DATABASE_URL}`);
 }, 50000);
 
 afterAll(async () => {
@@ -17,12 +18,12 @@ afterAll(async () => {
 describe("Testing API", () => {
   it('/api/* for 404', async () => {
     const response = await superTest(app)
-    .get('/api/*');
+      .get('/api/*');
     expect(response.statusCode).toBe(404);
   });
   it('Getting all blogs', async () => {
     const response = await superTest(app)
-    .get('/api/blogs');
+      .get('/api/blogs');
     expect(response.body.message).toContain('These are the Blogs retrieved!');
   });
   it('Posting a query', async () => {
@@ -210,7 +211,7 @@ describe("Testing API", () => {
       .set('Authorization', 'Bearer ' + token.token);
     expect(res.body.message).toContain('These are the Queries');
   });
-  
+
   it('get a query', async () => {
     const res = await superTest(app)
       .get('/api/queries/65e100aab61562a46e33e6e1')
@@ -258,7 +259,7 @@ describe("Testing API", () => {
       .get('/api/blogs/659ddfbcc954392f2eeda438/likes')
       .set('Authorization', 'Bearer ' + token.token);
     expect(res.statusCode).toBe(404);
-  }); 
+  });
   it('get a query error', async () => {
     const res = await superTest(app)
       .get('/api/queries/655ddfbcc954392f2eeda438')
@@ -290,7 +291,7 @@ describe("Testing API", () => {
         email: "hhgggg@gmail.com",
         comment: "like this",
       })
-      expect(res.statusCode).toBe(401);
+    expect(res.statusCode).toBe(401);
   });
   it('deleting a query', async () => {
     const res = await superTest(app)
@@ -310,5 +311,5 @@ describe("Testing API", () => {
   //   expect(res.statusCode).toBe(201);
   // });
 
-  
+
 });

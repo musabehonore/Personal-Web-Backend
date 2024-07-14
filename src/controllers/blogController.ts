@@ -6,7 +6,6 @@ import CustomResponse from '../utilities/response';
 import { blogVal } from '../validations/blogValidation';
 import { commentVal } from '../validations/commentValidation';
 import cloudinary from '../middleware/cloudinary';
-import cors from 'cors';
 
 
 interface IReqComment extends Request {
